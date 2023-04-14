@@ -9,6 +9,8 @@ To be used on Yamaha work later on..
 
 [Selenium Locators](https://www.selenium.dev/documentation/webdriver/elements/locators/)
 
+[Pytest Documentation](https://docs.pytest.org/en/7.1.x/getting-started.html#get-started)
+
 
 
 ## Cheat Sheet
