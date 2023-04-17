@@ -26,3 +26,4 @@ xpath format = `//tag[@attribute='value']`
 | `locator.click()` | Clicks a locator, mostly used on buttons |
 | `locator.send_keys(str)` | Types in the string argument in a locators field |
 | `locator.is_displayed()` | Return whether the locator is visible to the user |
+| `pytest -m <mark>` | Run the marked group of test with the specified name |

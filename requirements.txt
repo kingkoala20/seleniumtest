@@ -1,0 +1,5 @@
+selenium
+webdriver-manager
+pytest
+pytest-html==3.1.1
+pytest-xdist==2.5.0

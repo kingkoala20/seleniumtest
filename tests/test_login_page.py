@@ -2,13 +2,6 @@ URL = "https://practicetestautomation.com/practice-test-login/"
 USERNAME = "student"
 PASSWORD = "Password123"
 
-
-## Open Browser
-
-# selenium 4 and google chrome
-from selenium import webdriver
-from selenium.webdriver.chrome.service import Service as ChromeService
-from webdriver_manager.chrome import ChromeDriverManager # type: ignore
 from selenium.webdriver.common.by import By
 import time
 import pytest
@@ -20,10 +13,8 @@ class TestPositiveScenarios:
         
     @pytest.mark.login
     @pytest.mark.positive
-    def test_positive_login(self):
-        
-        driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))
-
+    def test_positive_login(self, driver):
+      
         ## Go to webpage
 
         driver.get(URL)
