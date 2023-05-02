@@ -20,7 +20,6 @@ class TestPositiveScenarios:
         driver.get(URL)
         time.sleep(2)
 
-
         ## Type username student into Username field
         username_locator = driver.find_element(By.ID, "username")
         username_locator.send_keys(USERNAME)

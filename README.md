@@ -11,6 +11,8 @@ To be used on Yamaha work later on..
 
 [Pytest Documentation](https://docs.pytest.org/en/7.1.x/getting-started.html#get-started)
 
+[Selenium Expected Conditions](https://www.selenium.dev/selenium/docs/api/py/webdriver_support/selenium.webdriver.support.expected_conditions.html)
+
 
 
 ## Cheat Sheet
@@ -26,4 +28,6 @@ xpath format = `//tag[@attribute='value']`
 | `locator.click()` | Clicks a locator, mostly used on buttons |
 | `locator.send_keys(str)` | Types in the string argument in a locators field |
 | `locator.is_displayed()` | Return whether the locator is visible to the user |
+| `locator.get_attribute(attr)` | Returns the value of an attribute of a locator |
 | `pytest -m <mark>` | Run the marked group of test with the specified name |
+| `driver.implicitly_wait(s)` | Implicitly waits s second, same as time.sleep, but within webdriver. Conventionally contained in driver processing |

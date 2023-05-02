@@ -6,10 +6,11 @@ from selenium.webdriver.edge.service import Service as EdgeService
 from webdriver_manager.microsoft import EdgeChromiumDriverManager
 
 
-@pytest.fixture(params=["chrome", "edge"])
+#@pytest.fixture(params=["chrome", "edge"])
+@pytest.fixture()
 def driver(request):
-    #browser = request.config.getoption("--browser") ##-- For selection of browsers
-    browser = request.param # Note this should be 'param' not 'params'. This line is for multiple browser testing.
+    browser = request.config.getoption("--browser") ##-- For selection of browsers
+    #browser = request.param # Note this should be 'param' not 'params'. This line is for multiple browser testing.
     print(f"Creating {browser} driver..")
     if browser == "edge":
         my_driver = webdriver.Edge(service=EdgeService(EdgeChromiumDriverManager().install()))
