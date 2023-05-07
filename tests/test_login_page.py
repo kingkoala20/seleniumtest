@@ -2,8 +2,10 @@ URL = "https://practicetestautomation.com/practice-test-login/"
 USERNAME = "student"
 PASSWORD = "Password123"
 
-from selenium.webdriver.common.by import By
-import time
+
+from page_objects.login_page import LoginPage
+from page_objects.logged_in_successfully import LoggedInSuccessfullyPage
+
 import pytest
 
 
@@ -14,35 +16,11 @@ class TestPositiveScenarios:
     @pytest.mark.login
     @pytest.mark.positive
     def test_positive_login(self, driver):
-      
-        ## Go to webpage
+        login_page = LoginPage(driver)
+        login_page.open()
+        login_page.execute_login(USERNAME, PASSWORD)
 
-        driver.get(URL)
-        time.sleep(2)
-
-        ## Type username student into Username field
-        username_locator = driver.find_element(By.ID, "username")
-        username_locator.send_keys(USERNAME)
-
-        ## Type password Password123 into Password field
-        password_locator = driver.find_element(By.ID, "password")
-        password_locator.send_keys(PASSWORD)
-
-        ## Push Submit button
-        submit_btn_locator = driver.find_element(By.XPATH, "//button[@class='btn']")
-        submit_btn_locator.click()
-        time.sleep(2)
-
-        ## Verify new page URL contains practicetestautomation.com/logged-in-successfully/
-        post_url = driver.current_url
-        assert "practicetestautomation.com/logged-in-successfully/" in post_url
-
-
-        ## Verify new page contains expected text ('Congratulations' or 'successfully logged in')
-        expected_text_list = ['Congratulations', 'Logged In Successfully']
-        result_text_locator = driver.find_element(By.XPATH, "//h1[@class='post-title']")
-        assert any(map(result_text_locator.text.__contains__, expected_text_list))
-
-        ## Verify button Log out is displayed on the new page
-        logout_btn_locator = driver.find_element(By.XPATH, "//a[@class='wp-block-button__link has-text-color has-background has-very-dark-gray-background-color']")
-        assert logout_btn_locator.is_displayed()
+        logged_in_page = LoggedInSuccessfullyPage(driver)
+        assert logged_in_page.expected_url == logged_in_page.current_url, "Actual Url failure!"
+        assert logged_in_page.header == "Logged In Successfully", "Header failure!"
+        assert logged_in_page.is_logout_button_displayed(), "Logout button should be visible."

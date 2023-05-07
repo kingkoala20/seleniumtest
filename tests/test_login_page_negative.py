@@ -1,8 +1,8 @@
-from selenium.webdriver.common.by import By
-import time
 import pytest
 
-from test_login_page import URL, USERNAME, PASSWORD
+from tests.test_login_page import URL, USERNAME, PASSWORD
+from page_objects.login_page import LoginPage
+
 
 
 class TestNegativeScenarios:
@@ -17,38 +17,11 @@ class TestNegativeScenarios:
         ]
         )
     def test_negative_login(self, driver, username, password, expected_error_message):
-        """
-        Open page
-        Type username incorrectUser into Username field
-        Type password Password123 into Password field
-        Puch Submit button
-        Verify error message is displayed
-        Verify error message text is Your username is invalid!
-        """
         
-
         ## Go to webpage
 
-        driver.get(URL)
+        login_page = LoginPage(driver)
+        login_page.open()
+        login_page.execute_login(user = username, pw = password)
 
-
-        ## Type username incorrectUser into Username field
-        username_locator = driver.find_element(By.ID, "username")
-        username_locator.send_keys(username)
-
-        ## Type password Password123 into Password field
-        password_locator = driver.find_element(By.ID, "password")
-        password_locator.send_keys(password)
-
-        ## Push Submit button
-        submit_btn_locator = driver.find_element(By.XPATH, "//button[@class='btn']")
-        submit_btn_locator.click()
-        time.sleep(2)
-
-        ## Verify error message is displayed
-        error_message_locator = driver.find_element(By.XPATH, "//div[@id='error']")
-        assert error_message_locator.is_displayed(), "Error message not properly displayed"
-
-
-        ## Verify error message text is Your username is invalid!
-        assert error_message_locator.text == expected_error_message, "Error should display 'Your username is invalid!'."
+        assert login_page.get_error_message() == expected_error_message
