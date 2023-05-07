@@ -1,3 +1,8 @@
+"""
+This conftest file contains the driver generation as a fixture that can be used
+throughout the project.
+"""
+
 import pytest
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service as ChromeService
@@ -23,6 +28,10 @@ def driver(request):
     my_driver.quit()
 
 def pytest_addoption(parser):
+    """
+    Here we added a pytest option to change browsers and automatically fetch the right webdriver
+    for it. We then call it with request.config.getoption method on our driver generation.
+    """
     parser.addoption(
         "--browser", action="store", default="chrome", help="browser to execute tests (Edge or Chrome)"
     )
